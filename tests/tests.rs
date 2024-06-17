@@ -844,3 +844,13 @@ mod torrent_file {
         }
     }
 }
+
+#[test]
+#[should_panic(expected = "Divide result is zero")]
+fn serialize_field_name_type_err() {
+    #[derive(Deserialize)]
+    struct TestType {
+        _field_name: Vec<u8>,
+    }
+    from_str::<TestType>("d1:ai1ee").expect("fail");
+}
